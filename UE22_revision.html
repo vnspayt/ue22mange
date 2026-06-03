@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UE22 – Révisions Rattrapage</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #f5e6e8;
+    --rose-mid: #e8c5cb;
+    --rose-deep: #c8848f;
+    --mint: #e4f0eb;
+    --mint-mid: #b8d8c8;
+    --mint-deep: #5a9e7c;
+    --lavender: #ede8f5;
+    --lavender-mid: #c5b8e8;
+    --lavender-deep: #7a5ea8;
+    --peach: #fdeee5;
+    --peach-mid: #f5c9aa;
+    --peach-deep: #d4784a;
+    --cream: #fdf8f0;
+    --text: #2d2030;
+    --text-light: #6b5870;
+    --shadow: rgba(80,50,100,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  /* HEADER */
+  .site-header {
+    background: linear-gradient(135deg, #f5e6e8 0%, #ede8f5 50%, #e4f0eb 100%);
+    padding: 32px 40px 20px;
+    border-bottom: 2px solid var(--rose-mid);
+    text-align: center;
+  }
+  .site-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--lavender-deep);
+    letter-spacing: 1px;
+  }
+  .site-header p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-top: 6px;
+    font-weight: 300;
+  }
+  /* TABS */
+  .tab-bar {
+    display: flex;
+    gap: 0;
+    background: #fff;
+    border-bottom: 2px solid var(--rose-mid);
+    padding: 0 24px;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .tab-btn {
+    padding: 14px 22px;
+    border: none;
+    background: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-light);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+  .tab-btn:hover { color: var(--lavender-deep); }
+  .tab-btn.active {
+    color: var(--lavender-deep);
+    border-bottom-color: var(--lavender-deep);
+    background: var(--lavender);
+    border-radius: 8px 8px 0 0;
+  }
+  /* CONTENT */
+  .tab-content { display: none; padding: 32px 40px 60px; max-width: 1100px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+  /* SECTION TITLES */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: var(--lavender-deep);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--lavender-mid);
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--rose-deep);
+    margin: 24px 0 10px;
+  }
+  h4 {
+    font-weight: 700;
+    color: var(--mint-deep);
+    font-size: 1rem;
+    margin: 16px 0 6px;
+  }
+  p { line-height: 1.75; margin-bottom: 10px; font-size: 0.97rem; }
+  /* CARDS */
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px var(--shadow);
+    border-left: 5px solid var(--lavender-mid);
+  }
+  .card.rose { border-left-color: var(--rose-deep); background: var(--rose); }
+  .card.mint { border-left-color: var(--mint-deep); background: var(--mint); }
+  .card.lavender { border-left-color: var(--lavender-deep); background: var(--lavender); }
+  .card.peach { border-left-color: var(--peach-deep); background: var(--peach); }
+  /* PILL BADGES */
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+  .badge-rose { background: var(--rose-deep); color: #fff; }
+  .badge-mint { background: var(--mint-deep); color: #fff; }
+  .badge-lavender { background: var(--lavender-deep); color: #fff; }
+  .badge-peach { background: var(--peach-deep); color: #fff; }
+  /* DEFINITION LIST */
+  .def-list dt {
+    font-weight: 700;
+    color: var(--lavender-deep);
+    margin-top: 14px;
+    font-size: 1rem;
+  }
+  .def-list dd {
+    margin-left: 16px;
+    line-height: 1.7;
+    font-size: 0.96rem;
+    color: var(--text);
+    border-left: 3px solid var(--lavender-mid);
+    padding-left: 12px;
+    margin-top: 4px;
+  }
+  /* SCHEMA TABLE */
+  .schema {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.93rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .schema th {
+    background: var(--lavender-deep);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+  }
+  .schema td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--lavender-mid);
+    background: #fff;
+    vertical-align: top;
+  }
+  .schema tr:nth-child(even) td { background: var(--lavender); }
+  /* SCM TABLE */
+  .scm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 2px;
+    margin: 16px 0;
+    border: 2px solid var(--lavender-mid);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.9rem;
+  }
+  .scm-header { background: var(--lavender-deep); color: #fff; padding: 10px 14px; font-weight: 700; text-align: center; }
+  .scm-cell { padding: 14px; text-align: center; line-height: 1.5; }
+  .scm-cell.hh { background: #e0f5ea; border: 2px solid var(--mint-deep); }
+  .scm-cell.hl { background: var(--peach); border: 2px solid var(--peach-deep); }
+  .scm-cell.lh { background: #fdeef5; border: 2px solid #d47a9a; }
+  .scm-cell.ll { background: #f5f5f5; border: 2px solid #aaa; }
+  /* ACCORDION */
+  .accordion { margin: 12px 0; }
+  .accordion-btn {
+    width: 100%;
+    text-align: left;
+    background: var(--lavender);
+    border: none;
+    padding: 13px 18px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--lavender-deep);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .accordion-btn:hover { background: var(--lavender-mid); }
+  .accordion-btn::after { content: '▼'; font-size: 0.8rem; transition: transform 0.2s; }
+  .accordion-btn.open::after { transform: rotate(180deg); }
+  .accordion-body {
+    display: none;
+    background: #fff;
+    border: 1px solid var(--lavender-mid);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 16px 20px;
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+  .accordion-body.open { display: block; }
+  /* SUB-TABS */
+  .sub-tab-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .sub-tab-btn {
+    padding: 8px 16px;
+    border: 2px solid var(--rose-mid);
+    background: #fff;
+    border-radius: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--rose-deep);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .sub-tab-btn:hover, .sub-tab-btn.active {
+    background: var(--rose-deep);
+    color: #fff;
+    border-color: var(--rose-deep);
+  }
+  .sub-content { display: none; }
+  .sub-content.active { display: block; }
+  /* KEY BOX */
+  .key-box {
+    background: linear-gradient(135deg, var(--lavender), var(--mint));
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 16px 0;
+    border: 1.5px solid var(--lavender-mid);
+  }
+  .key-box strong { color: var(--lavender-deep); }
+  /* ANNALES */
+  .annale-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 14px var(--shadow);
+    border-top: 5px solid var(--peach-deep);
+  }
+  .annale-card .session-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--peach-deep);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .annale-card .question-text {
+    background: var(--peach);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 10px 0;
+    border-left: 4px solid var(--peach-deep);
+  }
+  .annale-card .answer-box {
+    margin-top: 14px;
+  }
+  .answer-toggle {
+    background: var(--mint-deep);
+    color: #fff;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+  }
+  .answer-toggle:hover { background: #3e7d5c; }
+  .answer-text {
+    display: none;
+    background: var(--mint);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 0.94rem;
+    line-height: 1.75;
+    border-left: 4px solid var(--mint-deep);
+  }
+  .answer-text.open { display: block; }
+  /* PROBA BADGE */
+  .proba {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .proba-high { background: #d1f0e0; color: #1e7e4e; border: 1.5px solid #5aaa80; }
+  .proba-med { background: #fff3cc; color: #9a6400; border: 1.5px solid #d4aa40; }
+  .proba-low { background: #fde8e8; color: #c0392b; border: 1.5px solid #e87070; }
+  ul { margin: 8px 0 8px 20px; }
+  li { margin-bottom: 5px; line-height: 1.65; font-size: 0.95rem; }
+  .example { background: var(--peach); border-radius: 6px; padding: 8px 12px; margin: 8px 0; font-style: italic; font-size: 0.92rem; border-left: 3px solid var(--peach-deep); }
+  .note { background: var(--mint); border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 0.92rem; border-left: 3px solid var(--mint-deep); }
+  .warning { background: #fff3cd; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 0.92rem; border-left: 3px solid #d4aa40; }
+  /* RESPONSIVE */
+  @media(max-width:700px){
+    .tab-content{padding:18px 12px 40px;}
+    .site-header{padding:20px 16px 14px;}
+    .site-header h1{font-size:1.5rem;}
+    .scm-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <h1>🌸 UE22 – Révisions Rattrapage</h1>
+  <p>Attitudes & Changements · Discrimination · Comportements Déviants — Université de Caen · L3 Psychologie</p>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('cm')">📚 Cours Magistral (CM)</button>
+  <button class="tab-btn" onclick="showTab('td')">🔬 Travaux Dirigés (TD)</button>
+  <button class="tab-btn" onclick="showTab('annales')">📝 Annales & Réponses</button>
+</div>
+
+<!-- ===================== CM ===================== -->
+<div id="tab-cm" class="tab-content active">
+  <h2>📚 Cours Magistraux — Ce qu'il faut savoir</h2>
+
+  <div class="sub-tab-bar">
+    <button class="sub-tab-btn active" onclick="showSub('cm','cm1')">1. Définitions fondamentales</button>
+    <button class="sub-tab-btn" onclick="showSub('cm','cm2')">2. Discrimination</button>
+    <button class="sub-tab-btn" onclick="showSub('cm','cm3')">3. Catégorisation &amp; groupes</button>
+    <button class="sub-tab-btn" onclick="showSub('cm','cm4')">4. Stéréotypes</button>
+    <button class="sub-tab-btn" onclick="showSub('cm','cm5')">5. Déshumanisation</button>
+    <button class="sub-tab-btn" onclick="showSub('cm','cm6')">6. Prévention &amp; application</button>
+  </div>
+
+  <!-- CM1 -->
+  <div id="cm-cm1" class="sub-content active">
+    <h2>1. Les définitions fondamentales</h2>
+    <p>Ces quatre concepts sont au cœur du cours. Ils forment une <strong>progression du plus léger au plus grave</strong>.</p>
+
+    <dl class="def-list">
+      <dt>🏷️ Stéréotype</dt>
+      <dd>Croyance généralisée et simplificatrice sur les caractéristiques (physiques, psychologiques, comportementales) d'un groupe social. <strong>Peut être positif ou négatif</strong>, mais réduit toujours la diversité des individus. Origine : le cerveau catégorise pour simplifier la réalité (coût cognitif faible).
+        <div class="example">Exemple : « les Asiatiques sont bons en maths » / « les personnes âgées sont lentes »</div>
+      </dd>
+      <dt>😠 Préjugé</dt>
+      <dd>Attitude ou jugement de valeur, souvent négatif, fondé sur les stéréotypes. Dimension <strong>affective</strong> (antipathie, méfiance, hostilité) — pas d'évaluation rationnelle.
+        <div class="example">Exemple : ne pas faire confiance à quelqu'un uniquement parce qu'il appartient à une minorité ethnique.</div>
+      </dd>
+      <dt>🔖 Stigmate / Stigmatisation</dt>
+      <dd>Processus par lequel une caractéristique réelle ou supposée devient une <strong>marque négative</strong> qui discrédite socialement. Goffman (1963) distingue 3 catégories : infractions morales, appartenances groupales, déficiences physiques. Se manifeste de 4 manières : publique, structurelle, par association, auto-stigmatisation.
+        <div class="example">Exemple : une cicatrice visible, un handicap, l'orientation sexuelle utilisés pour exclure la personne.</div>
+      </dd>
+      <dt>🚫 Déshumanisation</dt>
+      <dd>Processus qui consiste à <strong>nier l'humanité</strong> de personnes ou groupes — les réduisant à des objets, animaux ou machines. Facilite les discriminations extrêmes en supprimant l'empathie.
+        <div class="example">Exemple : qualifier un groupe de « parasites » pendant un génocide pour légitimer la violence.</div>
+      </dd>
+    </dl>
+
+    <div class="card lavender">
+      <h4>🌱 Schéma logique (du moins grave au plus grave)</h4>
+      <table class="schema">
+        <tr><th>Concept</th><th>Nature</th><th>Exemple rapide</th></tr>
+        <tr><td><strong>Stéréotype</strong></td><td>Croyance généralisée</td><td>"Les X sont…"</td></tr>
+        <tr><td><strong>Préjugé</strong></td><td>Émotion / jugement de valeur</td><td>"Je n'aime pas les X parce que…"</td></tr>
+        <tr><td><strong>Stigmate</strong></td><td>Marque sociale vécue</td><td>"Toi, tu es X, donc tu es rejeté"</td></tr>
+        <tr><td><strong>Déshumanisation</strong></td><td>Effacement de l'humanité</td><td>"Les X ne sont même pas humains"</td></tr>
+      </table>
+    </div>
+
+    <h3>Les 4 manifestations du stigmate (Pryor & Reeder, 2011)</h3>
+    <div class="card rose">
+      <ul>
+        <li><strong>Stigmatisation publique :</strong> réactions cognitives, affectives et comportementales de la société face au stigmatisé. Inclut labellisation, stéréotypes, réactions émotionnelles (dégoût, pitié) et comportements discriminatoires.</li>
+        <li><strong>Stigmatisation structurelle :</strong> institutions, lois ou organisation sociale qui ne sont pas adaptées et excluent certaines personnes (ex : absence de sous-titres, inaccessibilité architecturale).</li>
+        <li><strong>Stigmatisation par association :</strong> le stigmate "contamine" ceux qui accompagnent le porteur (conjoint, parent, ami proche).</li>
+        <li><strong>Auto-stigmatisation :</strong> la personne intériorise le regard négatif des autres et se dévalorise elle-même.</li>
+      </ul>
+    </div>
+
+    <h3>Les 8 dimensions du stigmate (Goffman + extensions)</h3>
+    <table class="schema">
+      <tr><th>Dimension</th><th>Question clé</th><th>Exemple</th></tr>
+      <tr><td>Visibilité</td><td>Peut-on le cacher ?</td><td>Cicatrice visible vs VIH non divulgué</td></tr>
+      <tr><td>Disruptif</td><td>Perturbe-t-il les interactions ?</td><td>Trouble de la parole</td></tr>
+      <tr><td>Dangerosité</td><td>Est-il menaçant ?</td><td>Maladie perçue contagieuse</td></tr>
+      <tr><td>Stabilité</td><td>Est-il permanent ?</td><td>Fracture (temporaire) vs handicap moteur</td></tr>
+      <tr><td>Violation de norme</td><td>Va-t-il contre les règles sociales ?</td><td>Tatouages dans certaines cultures</td></tr>
+      <tr><td>Contrôlabilité</td><td>Est-ce la "faute" de la personne ?</td><td>Obésité perçue comme responsabilité personnelle</td></tr>
+      <tr><td>Esthétisme</td><td>Est-il jugé laid ?</td><td>Malformations faciales</td></tr>
+      <tr><td>Sévérité</td><td>Quelles conséquences sociales ?</td><td>Schizophrénie très stigmatisée</td></tr>
+    </table>
+    <div class="note">⚠️ La <strong>contrôlabilité</strong> est cruciale : un stigmate perçu comme incontrôlable génère de la compassion et de l'aide, tandis qu'un stigmate perçu comme contrôlable génère de la colère et une absence d'aide.</div>
+
+    <h3>Pourquoi stigmatise-t-on ? (Phelan & Link, 2008)</h3>
+    <div class="card mint">
+      <ul>
+        <li><strong>Keep people down (exploitation/domination) :</strong> maintien des asymétries de pouvoir, légitimation des inégalités sociales.</li>
+        <li><strong>Keep people in (conformité aux normes) :</strong> le groupe dominant définit la normalité et pousse les "déviants" à se conformer.</li>
+        <li><strong>Keep people away (protection contre la contamination) :</strong> mécanisme évolutif de rejet des individus perçus comme malades/dangereux.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CM2 -->
+  <div id="cm-cm2" class="sub-content">
+    <h2>2. La discrimination — données de terrain</h2>
+
+    <h3>Comment mesurer la discrimination ?</h3>
+    <div class="card lavender">
+      <h4>Méthode 1 : Comparaison entre échantillons</h4>
+      <p>Ex : écart salarial femmes/hommes. Attention au <strong>cadrage des données</strong> : raisonner en ETP (équivalent temps plein) gomme l'inégalité structurelle du temps partiel (majoritairement contraint chez les femmes). Les pourcentages ne sont <strong>pas réversibles</strong> → vigilance sur ce qu'on met à 100.</p>
+      <p><strong>Cherry picking :</strong> choisir les chiffres qui arrangent son argument en ignorant ceux qui contredisent.</p>
+    </div>
+    <div class="card rose">
+      <h4>Méthode 2 : Testing (années 90-2000)</h4>
+      <p>Envoi de CV fictifs pour mesurer les discriminations à l'embauche. Les statistiques ethniques sont interdites en France → méthode des associations.</p>
+      <p><strong>Étude DARES (2006) — serveurs en île-de-France :</strong> 3x plus de chances d'être convoqué pour un candidat à nom français vs nom marocain.</p>
+      <p><strong>Baromètre ADIA (2006) — 6461 CV à 1340 offres :</strong></p>
+      <ul>
+        <li>Homme 48-50 ans : 3x moins de réponses</li>
+        <li>Femme avec 3 enfants : 37% de réponses en moins</li>
+        <li>Nom à consonance maghrébine : 3x moins de réponses</li>
+        <li>Handicap reconnu : 2x moins de réponses</li>
+        <li>Visage disgracieux : 29% de moins</li>
+      </ul>
+    </div>
+
+    <h3>Que dit la loi ? (L1132-1 du Code du travail)</h3>
+    <p>La discrimination est un traitement défavorable fondé sur un critère légalement défini, dans une situation visée par la loi.</p>
+    <ul>
+      <li><strong>Discrimination directe :</strong> décision fondée explicitement sur un critère protégé.</li>
+      <li><strong>Discrimination indirecte :</strong> règle apparemment neutre mais avec des effets défavorables sur un groupe protégé.</li>
+    </ul>
+    <p>Peines : jusqu'à <strong>45 000 € d'amende et 3 ans de prison</strong> (article 225-1). L'auteur peut être une personne physique ou morale, privée ou publique.</p>
+
+    <h3>Intersectionnalité</h3>
+    <p>Concept issu de la lutte pour les droits civiques aux USA : certaines personnes subissent plusieurs sources de discrimination simultanément (ex : femme + noire = double peine, ou création d'une nouvelle forme de discrimination spécifique).</p>
+    <div class="note">Données officielles : Rapport Défenseur des droits 2017 — 21,8% des réclamations liées au handicap, 17,6% à l'origine, 11,9% à l'état de santé.</div>
+  </div>
+
+  <!-- CM3 -->
+  <div id="cm-cm3" class="sub-content">
+    <h2>3. Catégorisation sociale et biais intergroupes</h2>
+
+    <h3>Le principe de base : endogroupe / exogroupe</h3>
+    <p>La tendance naturelle des humains à s'organiser en groupes a des conséquences sur 3 registres :</p>
+    <div class="card lavender">
+      <ul>
+        <li><strong>Niveau cognitif :</strong> pensées et croyances plus favorables pour l'endogroupe</li>
+        <li><strong>Niveau affectif :</strong> on apprécie mieux son endogroupe</li>
+        <li><strong>Niveau comportemental :</strong> comportements pro-sociaux préférentiels envers l'endogroupe</li>
+      </ul>
+    </div>
+
+    <h3>Théorie des conflits réels (Sherif)</h3>
+    <p>Le biais de favoritisme endogroupe serait lié à la <strong>compétition intergroupe</strong> — il émerge quand la satisfaction des besoins de l'endogroupe se fait au détriment de l'autre groupe. Testé avec les célèbres camps de vacances.</p>
+
+    <h3>Paradigme des groupes minimaux (Tajfel)</h3>
+    <p>Expérience clé : créer des groupes sans histoire commune ni enjeux réels → la <strong>simple catégorisation arbitraire</strong> suffit à générer du favoritisme endogroupe.</p>
+    <div class="card mint">
+      <h4>Résultats (distributions de points/bonbons)</h4>
+      <ul>
+        <li>Quand X et Y sont <strong>du même groupe</strong> → stratégie de récompense commune maximale</li>
+        <li>Quand X et Y sont <strong>de groupes différents</strong> → stratégie de différence maximale (quitte à gagner moins, l'important est que mon groupe ait PLUS que l'autre)</li>
+      </ul>
+      <p>Apparaît chez les enfants dès 3 ans (genre et âge), 5 ans (origine ethnique), 11 mois (similitude perçue). Même chez les animaux !</p>
+    </div>
+
+    <h3>Amour endogroupe ≠ Haine exogroupe (Brewer, 1999)</h3>
+    <p>L'identification à l'endogroupe est <strong>indépendante</strong> des attitudes négatives envers l'exogroupe. Le biais provient principalement de la défense des intérêts de son groupe, pas de l'hostilité directe envers l'autre.</p>
+    <div class="note">La préférence endogroupe agit comme un <em>support</em> à l'hostilité exogroupe, mais pas dans tous les cas. La perspective évolutionniste : raccourci pratique et fonctionnel (coopération → confiance → frontières groupales claires).</div>
+
+    <h3>Groupes dominants / dominés (Lorenzi-Cioldi)</h3>
+    <p>Les groupes ne sont pas forcément symétriques → peuvent induire des <strong>rapports de domination</strong>. Le groupe faible peut intérioriser sa propre stigmatisation.</p>
+    <div class="note">📌 <strong>Schéma de progression possible :</strong> Biais de favoritisme endogroupe → + haine exogroupe → + déshumanisation exogroupe. Chaque étape s'ajoute mais n'est pas inévitable.</div>
+  </div>
+
+  <!-- CM4 -->
+  <div id="cm-cm4" class="sub-content">
+    <h2>4. Stéréotypes — mécanismes approfondis</h2>
+
+    <h3>Mécanismes de catégorisation sociale</h3>
+    <p>Face à trop de stimuli, le cerveau simplifie → <strong>catégorisation</strong>. Trois niveaux : supra-ordonnées (études), basiques (psychologie/histoire), spécifiques (psychologie sociale).</p>
+    <ul>
+      <li><strong>Principe d'accentuation :</strong> on exagère les ressemblances intra-catégorielles ("les H aiment le foot")</li>
+      <li><strong>Principe de contraste :</strong> on exagère les différences inter-catégorielles ("hommes et femmes sont très différents")</li>
+      <li><strong>Biais d'homogénéité des exogroupes :</strong> on perçoit la diversité dans son groupe mais pas dans l'exogroupe</li>
+    </ul>
+
+    <h3>Les "Big 3" catégories (Fiske & Neuberg)</h3>
+    <div class="card rose">
+      <p>Traitement automatique, spontané, dès les premières secondes :</p>
+      <ul>
+        <li>🚻 <strong>Le genre</strong></li>
+        <li>🌍 <strong>L'origine ethnique</strong></li>
+        <li>🕰️ <strong>L'âge</strong> (unique car change continuellement tout au long de la vie)</li>
+      </ul>
+    </div>
+
+    <h3>Stéréotype Content Model (SCM) — Fiske et al., 2002</h3>
+    <p>80% de la variance de notre opinion sur un groupe peut se résumer à 2 dimensions <strong>orthogonales</strong> :</p>
+    <div class="scm-grid">
+      <div class="scm-header">↑ HAUTE CHALEUR</div>
+      <div class="scm-header">↓ BASSE CHALEUR</div>
+      <div class="scm-cell hl">
+        <strong>Paternalisme</strong><br>
+        <span style="font-size:0.85rem">Haute chaleur / Basse compétence</span><br>
+        <em>Ex : personnes âgées, handicapées</em><br>
+        Comportement : aide, protection, paternalisme
+      </div>
+      <div class="scm-cell hh">
+        <strong>Admiration</strong><br>
+        <span style="font-size:0.85rem">Haute chaleur / Haute compétence</span><br>
+        <em>Ex : endogroupe, alliés</em><br>
+        Comportement : coopération, aide mutuelle
+      </div>
+      <div class="scm-cell ll">
+        <strong>Mépris</strong><br>
+        <span style="font-size:0.85rem">Basse chaleur / Basse compétence</span><br>
+        <em>Ex : SDF, sans-abris, groupes marginaux</em><br>
+        Comportement : exclusion, ignorance → déshumanisation
+      </div>
+      <div class="scm-cell lh">
+        <strong>Envie</strong><br>
+        <span style="font-size:0.85rem">Basse chaleur / Haute compétence</span><br>
+        <em>Ex : groupes perçus comme rivaux, riches</em><br>
+        Comportement : combat, agression
+      </div>
+    </div>
+    <p style="font-size:0.85rem;color:var(--text-light);margin-top:4px">Les <strong>low/low</strong> (basse chaleur + basse compétence) n'activent pas le cortex préfrontal médian → déshumanisation visible au niveau cérébral (Harris & Fiske, 2006/2011).</p>
+
+    <h3>Comment se transmettent les stéréotypes ?</h3>
+    <ul>
+      <li><strong>Groupes de référence :</strong> parents (valeurs implicites), amis (renforcement/contestation), école</li>
+      <li><strong>Médias :</strong> renforcent les stéréotypes (représentations simplifiées répétées) mais peuvent aussi les déconstruire</li>
+    </ul>
+
+    <h3>Stéréotypes et âgisme (Butler, 1969)</h3>
+    <p>L'intériorisation des stéréotypes sur les personnes âgées (PA) a des effets réels et mesurables :</p>
+    <div class="card mint">
+      <ul>
+        <li><strong>Performance manuscrite (Lévy) :</strong> amorçage subliminal négatif → écriture plus tremblante, plus âgée</li>
+        <li><strong>Espérance de vie :</strong> perception positive du vieillissement en jeunesse = +7,5 ans de vie</li>
+        <li><strong>Différence genre :</strong> les femmes sont perçues comme "âgées" 5 ans avant les hommes</li>
+        <li><strong>Stratégie efficace :</strong> multi-catégorisation (PA + ancienne ouvrière + grand-mère + fan de basket) → casse l'heuristique du stéréotype</li>
+      </ul>
+    </div>
+
+    <h3>3 biais liés aux stéréotypes</h3>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">🔁 1. Effet d'amorçage des stéréotypes (Bargh et al., 1996)</button>
+      <div class="accordion-body">
+        <p>Un stéréotype activé influence le comportement <strong>sans conscience</strong>. Expérience célèbre : jeu de phrases mélangées avec des mots liés aux PA → les participants marchent plus lentement pour aller à l'ascenseur.</p>
+        <p><strong>Deux théories en débat :</strong></p>
+        <ul>
+          <li><strong>Bargh :</strong> principe idéomoteur = imitation inconsciente du stéréotype activé</li>
+          <li><strong>Césario :</strong> préparation à l'interaction = le cerveau se prépare à interagir avec le groupe stéréotypé (chez les hétéros peu ouverts amorçés par "gay" → agressivité, pas douceur)</li>
+        </ul>
+        <p>Conclusion : amorçage = préparation à l'interaction. Conséquences importantes dans les situations évaluatives (entretiens, soins...).</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">⚠️ 2. Menace du stéréotype (Steele & Aronson)</button>
+      <div class="accordion-body">
+        <p>Craindre de confirmer un stéréotype négatif sur son groupe réduit les performances (ressources cognitives mobilisées pour gérer la menace → moins disponibles pour la tâche).</p>
+        <p><strong>Mécanismes :</strong> réponse physiologique de stress, contrôle actif de la performance, suppression des pensées négatives.</p>
+        <p><strong>Exemples :</strong></p>
+        <ul>
+          <li>Personnes noires + test présenté comme test d'intelligence → sous-performance</li>
+          <li>Filles + exercice présenté comme mathématiques → baisse des performances</li>
+          <li>PA + test de mémoire avec mention de différences âge/jeunes → 25-40% de faux diagnostics MCI évitables !</li>
+        </ul>
+        <div class="warning">📌 En tant que psychologue : <strong>la façon dont on présente les tests influence la performance</strong>. Réduire la menace situationnelle = améliorer la validité des évaluations.</div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">🪞 3. Auto-stéréotypisation (Latrofa, 2010)</button>
+      <div class="accordion-body">
+        <p>Intérioriser les stéréotypes de son propre groupe et les appliquer à soi-même. Plus présent dans les groupes de bas statut.</p>
+        <p><strong>Directionnalité :</strong> ce sont les traits du groupe qui s'appliquent à soi (et non l'inverse).</p>
+
+        <h4>Phénomène de distanciation (spécifique aux PA)</h4>
+        <p>Deux phénomènes concomitants :</p>
+        <ul>
+          <li><strong>Internalisation du stéréotype</strong> → effet sur la perception de soi → assimilation</li>
+          <li><strong>Age-groupe dissociation</strong> → on se dissocie de son propre groupe d'âge pour se protéger</li>
+        </ul>
+        <p>70% des PA se sentent significativement plus jeunes que leur âge biologique. 80% préfèrent les jeunes. C'est <em>parce qu'elles intériorisent</em> le stéréotype négatif qu'elles s'en dissocient.</p>
+        <p><strong>Identité "âge" vs identité "génération" :</strong> l'identité liée à l'âge est mal vécue (évoque le déclin). L'identité liée à la génération est bien perçue (partage culturel, expériences communes). <strong>Solution : parler de génération plutôt que d'âge.</strong></p>
+
+        <h4>Le critère essentialisant — attention !</h4>
+        <p>L'essentialisme = présenter un trait comme naturel, inné, immuable ("les femmes c'est comme ça", "avec l'âge c'est normal de décliner"). Or le corps s'entretient, peut s'améliorer. <strong>Plus l'essentialisation est forte, plus les effets délétères des stéréotypes sont importants.</strong></p>
+
+        <h4>Stratégies de défense contre l'auto-stéréotypisation (efficacité variable)</h4>
+        <table class="schema">
+          <tr><th>Stratégie</th><th>Efficacité</th><th>Remarque</th></tr>
+          <tr><td>Diffusion d'info rationnelle</td><td>Nécessaire mais insuffisante</td><td>Ne suffit pas seule</td></tr>
+          <tr><td>Cours "vieillissement positif"</td><td>À évaluer</td><td>Résultats en cours</td></tr>
+          <tr><td>Suppression du stéréotype</td><td>❌ Peu efficace</td><td>Risque d'effet rebond</td></tr>
+          <tr><td>Représentations positives</td><td>⚠️ Parfois contre-productif</td><td>Modèle trop fort → inconfort. Expo PA admirée + jeune non apprécié → discrimination du jeune</td></tr>
+          <tr><td>Groupes de prise de conscience</td><td>Insuffisamment évalué</td><td>Accroître la conscience des biais pour s'en protéger</td></tr>
+          <tr><td>Multi-catégorisation</td><td>✅ Efficace</td><td>Casse l'heuristique du stéréotype</td></tr>
+          <tr><td>Identité "génération" vs "âge"</td><td>✅ Recommandée</td><td>Connotation positive du partage culturel</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CM5 -->
+  <div id="cm-cm5" class="sub-content">
+    <h2>5. Déshumanisation — modèles et mécanismes</h2>
+
+    <p>La déshumanisation ≠ dénigrement : on peut rejeter un exogroupe sans le déshumaniser. Ce sont des dimensions orthogonales (dissociables).</p>
+
+    <h3>Les 5 grands modèles de déshumanisation</h3>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">1. Infra-humanisation (Leyens et al., 2000-2002)</button>
+      <div class="accordion-body">
+        <p><strong>Hypothèse :</strong> les individus attribueraient moins d'humanité aux exogroupes qu'à leur endogroupe. "Moins humains", pas "non humains" (Leyens, 2012).</p>
+
+        <h4>Distinction émotions primaires vs sentiments (émotions secondaires)</h4>
+        <table class="schema">
+          <tr><th></th><th>Émotions primaires</th><th>Sentiments (émotions secondaires)</th></tr>
+          <tr><td><strong>Exemples</strong></td><td>Peur, colère, joie, surprise, calme</td><td>Nostalgie, honte, culpabilité, compassion, orgueil, remords, tendresse, mélancolie</td></tr>
+          <tr><td><strong>Caractéristiques</strong></td><td>Amorçage rapide, durée brève, spontanées, présentes tôt dans la vie, peu variables entre cultures</td><td>Durée longue, moins intenses, impliquent moralité/cognition/sensibilité, apparaissent tardivement, plus internalisées</td></tr>
+          <tr><td><strong>Partagées avec</strong></td><td>Animaux ET humains</td><td>Uniquement humains</td></tr>
+          <tr><td><strong>Attribution intergroupe</strong></td><td>Autant à endo qu'à exogroupe</td><td>Préférentiellement à l'<strong>endogroupe</strong> ← infra-humanisation</td></tr>
+        </table>
+
+        <h4>Étude 1 (72 étudiants)</h4>
+        <p>16 mots présentés aléatoirement : 4 sentiments, 4 émotions, 8 distracteurs. Consigne : sélectionner les mots typiques d'un membre de l'endo vs exogroupe.</p>
+        <p><strong>Résultat :</strong> les sentiments sont plus attribués à l'endogroupe. Les émotions : pas de différence intergroupe.</p>
+
+        <h4>Étude 2 (87 étudiants) — valence</h4>
+        <p>20 mots : 3 sentiments+, 3 sentiments−, 3 émotions+, 3 émotions−, 8 distracteurs.</p>
+        <p><strong>Résultat :</strong> effet intergroupe sur les sentiments <strong>sans interaction avec la valence</strong> → qu'ils soient positifs ou négatifs, les sentiments sont plus attribués à l'endogroupe. Les émotions : toujours pas d'effet intergroupe.</p>
+
+        <h4>Ce qu'on sait depuis (nuances)</h4>
+        <ul>
+          <li>Ne fonctionne <strong>pas</strong> avec les groupes minimaux (Demoulin et al., 2009) → la catégorisation doit avoir un sens social réel</li>
+          <li>Plus l'identification au groupe est forte, plus l'infra-humanisation de l'exogroupe est forte (Paladino et al., 2004)</li>
+          <li>Pas d'infra-humanisation si l'autre est identifié par un <strong>nom</strong> (Leyens et al., 2003) → l'infra-humanisation suppose que l'autre est anonyme/inconnu</li>
+          <li>Présenter des sentiments à l'exogroupe augmente les comportements pro-sociaux envers lui (Vaes et al.)</li>
+        </ul>
+
+        <h4>Infra-humanisation comme déculpabilisation</h4>
+        <ul>
+          <li>Les patients mourants sont parfois infra-humanisés par les soignants pour éviter le burn-out (Vaes &amp; Muratore, 2011) → mais réhumanisation si on demande d'argumenter pour l'euthanasie (Leyens, 2013)</li>
+          <li>Un accidenté qui meurt est jugé avoir plus d'esprit qu'un accidenté qui devient végétatif (Gray, Knickman &amp; Wegner, 2011)</li>
+          <li>Le rappel des méfaits de son endogroupe envers un exogroupe <strong>intensifie</strong> l'infra-humanisation (Castano &amp; Giner-Sorolla, 2006) → rationalisation pour rétablir la sérénité psychologique. Fonctionne seulement s'il y a <strong>perception de culpabilité collective</strong>, pas juste un rappel factuel.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">2. Modèle duel — UH vs NH (Haslam, 2006)</button>
+      <div class="accordion-body">
+        <p>2 conceptions de l'humanité → 2 types de déshumanisation :</p>
+        <table class="schema">
+          <tr><th>Dimension</th><th>Caractéristiques</th><th>Déshumanisation résultante</th><th>La cible ressemble à…</th></tr>
+          <tr><td><strong>Uniquement Humaine (UH)</strong></td><td>Courtoisie, raffinement, rationalité, maturité morale. Développement tardif, varient selon cultures</td><td><strong>Animalistique</strong></td><td>Un animal primitif, instinctif</td></tr>
+          <tr><td><strong>Nature Humaine (NH)</strong></td><td>Réactivité, chaleur, ouverture cognitive, profondeur émotionnelle. Plus universels</td><td><strong>Mécanistique</strong></td><td>Un robot, objet froid, superficiel</td></tr>
+        </table>
+        <p><strong>Auto-humanisation :</strong> on humanise ses propres faiblesses pour les excuser ("l'erreur est humaine").</p>
+        <div class="note">Avantage : modèle macro qui distingue déshumanisation subtile/grossière, animalistique/mécanistique, intergroupe/interpersonnelle. Inconvénient : faible fiabilité test-retest.</div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">3. Apport du SCM — Harris & Fiske (2006)</button>
+      <div class="accordion-body">
+        <p>Les groupes <strong>low chaleur / low compétence</strong> (ex : SDF, sans-abris, obèses) n'activent pas le cortex préfrontal médial (MPFC) — zone de la cognition sociale — mais activent l'<strong>insula</strong> (liée au dégoût).</p>
+        <p>→ Ces groupes sont les seuls à ne pas déclencher l'attribution spontanée d'états mentaux. <strong>La déshumanisation est visible dans les activations cérébrales.</strong></p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">4. Perception de l'esprit — Waytz et al. (2010)</button>
+      <div class="accordion-body">
+        <p>Attribution d'esprit = bi-dimensionnelle (Gray et al., 2007) :</p>
+        <ul>
+          <li><strong>Agentisme :</strong> capacités mentales (pensée, contrôle de soi, communication) → nous distingue des animaux</li>
+          <li><strong>Expérience :</strong> émotions, conscience, personnalité → nous distingue des robots/objets</li>
+        </ul>
+        <p><strong>Déshumanisation = démentalisation</strong> (Kozak et al., 2006) : échec à considérer spontanément l'esprit d'autrui lors de la perception.</p>
+        <p><strong>Anthropomorphisme</strong> = excès inverse : trop d'esprit attribué à des entités (animaux de compagnie, ordinateurs, divinités).</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">5. Déshumanisation flagrante — Kteily et al. (2015)</button>
+      <div class="accordion-body">
+        <p>Mesure directe et flagrante : <strong>"The Ascent of Man"</strong> — échelle de 0 à 100 représentant l'évolution humaine. On demande aux participants où situer différents groupes sur cette échelle.</p>
+        <p>Fidèle en test-retest. Montre une hiérarchie des groupes : immigrants mexicains, arabes, musulmans perçus comme moins évolués/humains.</p>
+        <table class="schema">
+          <tr><th>Avantages</th><th>Inconvénients</th></tr>
+          <tr><td>Fidèle, score objectif</td><td>Poser la question force la gradation</td></tr>
+          <tr><td>Mesure directe</td><td>Non éthique (comparaison à animaux)</td></tr>
+          <tr><td></td><td>Trop flagrante pour la prévention</td></tr>
+        </table>
+        <p><strong>Mesure alternative :</strong> privation de droits humains (Alabrello & Rubini, 2012) — si on accorde moins de droits = déshumanisation.</p>
+      </div>
+    </div>
+
+    <h3>Contextes de déshumanisation</h3>
+    <div class="card rose">
+      <ul>
+        <li><strong>Santé :</strong> patients psychiatriques/médicaux, handicapés, autistes, sans-abris dans les structures d'accueil. L'infirmière qui dit "chambre 404" plutôt que "M. Dupont".</li>
+        <li><strong>Citoyenneté :</strong> gays et lesbiennes, exogroupes politiques, personnes âgées</li>
+        <li><strong>Travail :</strong> seniors, personnes traitées comme des marchandises</li>
+        <li><strong>Violence de masse :</strong> génocides, massacres — déshumanisation des victimes facilite la violence (Kelman, 1976 ; Staub, 1989)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CM6 -->
+  <div id="cm-cm6" class="sub-content">
+    <h2>6. Prévention et psychologie sociale appliquée</h2>
+
+    <h3>Psychologie sociale appliquée</h3>
+    <p><em>"Étude des processus mentaux, tout ce qui va venir influencer nos comportements et certitudes"</em> (Allport). Pas de la RH, pas des thérapies de groupe, pas de la psychopathologie clinique.</p>
+    <p>Se focalise sur la <strong>prévention primaire et secondaire</strong> (vs psychologie clinique : secondaire + tertiaire).</p>
+    <p>Domaines d'application : travail, santé, environnement, citoyenneté, éducation, communication, politique...</p>
+
+    <h3>Techniques d'intervention psychosociale (ex : prévention binge drinking)</h3>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">Technique 1 : Hypocrisie induite</button>
+      <div class="accordion-body">
+        <p>Phase 1 → saillance normative : rappeler la norme sociale (l'alcool c'est mauvais pour la santé).<br>
+        Phase 2 → rappel du comportement passé (dernière fois que j'ai bu excessivement).<br>
+        → Crée une dissonance cognitive entre valeurs et actes → modification comportementale vers la norme.</p>
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">Technique 2 : Social Identity Mapping</button>
+      <div class="accordion-body">
+        <p>Philosophie "social cure" : les appartenances groupales multiples fournissent des ressources matérielles et psychologiques. On cartographie les identités sociales du sujet (tous ses groupes d'appartenance, leur valeur, leurs liens). Utile lors de changements de vie (prévention rechute addiction, transitions).</p>
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">Technique 3 : Modeling motivationnel (Morgenroth, 2015)</button>
+      <div class="accordion-body">
+        <p>Modèles de vie inspirants. 3 fonctions :</p>
+        <ul>
+          <li>Modèles comportementaux : "comment réussir"</li>
+          <li>Représentation du possible : "le but est atteignable"</li>
+          <li>Source d'inspiration : rendent le but désirable</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Savoirs chauds vs savoirs froids (dans la communication)</h3>
+    <div class="card lavender">
+      <ul>
+        <li><strong>Savoirs chauds :</strong> basés sur les expériences, émotions, vécus → créent l'empathie (ex : témoignages, conférences gesticulées)</li>
+        <li><strong>Savoirs froids :</strong> théoriques, analyses scientifiques, faits concrets → apportent crédibilité et légitimité (ex : TED Talks, articles)</li>
+      </ul>
+      <p>Une communication efficace équilibre les deux.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TD ===================== -->
+<div id="tab-td" class="tab-content">
+  <h2>🔬 Travaux Dirigés — Ce qu'il faut maîtriser</h2>
+
+  <div class="sub-tab-bar">
+    <button class="sub-tab-btn active" onclick="showSub('td','td1')">TD1 : Stigmatisation</button>
+    <button class="sub-tab-btn" onclick="showSub('td','td2')">TD2 : Communication</button>
+    <button class="sub-tab-btn" onclick="showSub('td','td3')">TD3 : Déshumanisation (modèles)</button>
+    <button class="sub-tab-btn" onclick="showSub('td','td4')">TD4 : Déshumanisation (SCM)</button>
+    <button class="sub-tab-btn" onclick="showSub('td','td5')">TD5 : Stratégies de prévention</button>
+  </div>
+
+  <!-- TD1 -->
+  <div id="td-td1" class="sub-content active">
+    <h2>TD1 — Stigmatisation sociale</h2>
+
+    <h3>Définition du stigmate</h3>
+    <p>Le stigmate = reconnaissance d'une <strong>différence</strong> + <strong>dévaluation</strong> de celle-ci. Concept universel et contextuel (une caractéristique peut être un stigmate dans un contexte mais pas dans un autre).</p>
+
+    <h3>3 catégories de stigmates selon Goffman (1963)</h3>
+    <div class="card rose">
+      <ul>
+        <li><strong>Infractions morales :</strong> comportements jugés "immoraux" (alcoolisme, criminalité)</li>
+        <li><strong>Appartenances groupales :</strong> religion, origine, orientation sexuelle</li>
+        <li><strong>Déficiences :</strong> handicaps, maladies visibles, différences physiques (défiguration, fauteuil roulant)</li>
+      </ul>
+    </div>
+
+    <h3>Les 8 dimensions du stigmate (à connaître)</h3>
+    <p>Visibilité · Disruptif · Dangerosité · Stabilité · Violation de norme · Contrôlabilité · Esthétisme · Sévérité</p>
+    <div class="note">Points clés : la <strong>contrôlabilité</strong> (stigmate incontrôlable → compassion+aide / contrôlable → colère+absence d'aide) et la <strong>visibilité</strong> (discrédité direct vs discréditable → problèmes différents).</div>
+
+    <h3>Pourquoi stigmatise-t-on ? (Phelan & Link, 2008)</h3>
+    <p>3 fonctions : <strong>Keep down</strong> (domination/exploitation) | <strong>Keep in</strong> (conformité aux normes) | <strong>Keep away</strong> (protection contre contamination)</p>
+
+    <h3>Modèle de Pryor & Reeder (2011) — 4 types de manifestations</h3>
+    <div class="card lavender">
+      <dl class="def-list">
+        <dt>Stigmatisation publique</dt>
+        <dd>Réactions cognitives (labellisation, stéréotypes, représentations de contrôlabilité/dangerosité), affectives (dégoût, pitié) et comportementales (discrimination, évitement). Modèle du double processus : système réflexe (réactions instinctives) + système fondé sur des règles (délibéré, lent).</dd>
+        <dt>Auto-stigmatisation</dt>
+        <dd>Conscience de posséder une caractéristique dévaluée → stigmatisation subie, anticipée ou internalisée. Implique des réactions comportementales, cognitives et affectives.</dd>
+        <dt>Stigmate par association (Pryor, 2012)</dt>
+        <dd>Le stigmate "contamine" ceux qui accompagnent le porteur. Les attitudes implicites et explicites modèrent cet effet. Ne s'étend pas aux simples collègues, seulement aux relations privilégiées.</dd>
+        <dt>Stigmatisation structurelle</dt>
+        <dd>Perpétuée par les institutions et systèmes idéologiques (ex : DSM qui a longtemps classifié l'homosexualité comme maladie mentale, lois raciales aux USA). Reproduit les inégalités sociales.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- TD2 -->
+  <div id="td-td2" class="sub-content">
+    <h2>TD2 — Communication et stigmatisation</h2>
+
+    <h3>Savoirs chauds vs savoirs froids</h3>
+    <div class="card mint">
+      <dl class="def-list">
+        <dt>Savoirs chauds</dt>
+        <dd>Basés sur les expériences personnelles, les émotions, les vécus. Utilisés dans les conférences gesticulées, témoignages. Ex : livre de Gringe sur son frère schizophrène. Créent de l'empathie et de l'identification.</dd>
+        <dt>Savoirs froids</dt>
+        <dd>Théoriques, s'appuient sur des analyses scientifiques et des faits concrets. TED Talks structurés. Apportent crédibilité et légitimité.</dd>
+        <dt>Conférence gesticulée</dt>
+        <dd>Prise de parole publique, acte d'éducation populaire. Tresse savoirs chauds et savoirs froids. Atterrissage politique. Plus efficace quand les deux sont équilibrés.</dd>
+      </dl>
+    </div>
+
+    <h3>Pistes d'amélioration psychosociales pour réguler un message</h3>
+    <ol style="margin-left:20px;line-height:2">
+      <li>Équilibrer savoirs chauds et savoirs froids</li>
+      <li>Favoriser l'identification au conférencier (situations universelles, quotidiennes)</li>
+      <li>S'appuyer sur la théorie des rôles sociaux pour expliquer les stéréotypes</li>
+      <li>Incorporer des contre-stéréotypes (exemples positifs allant à l'encontre du stéréotype)</li>
+      <li>Favoriser l'interaction et l'engagement actif du public (jeux de rôle, simulations)</li>
+      <li>Apporter une perspective historique et contextuelle</li>
+      <li>Souligner la responsabilité collective et appeler à des actions concrètes</li>
+    </ol>
+
+    <h3>Représentations de la stigmatisation dans les médias</h3>
+    <p>La stigmatisation s'exprime dans de nombreux formats culturels :</p>
+    <ul>
+      <li>Cinéma (ex : stéréotypes de la schizophrénie dans les films d'horreur)</li>
+      <li>Peinture (vieillesse : de la sagesse à la mélancolie selon les époques)</li>
+      <li>Littérature, publicités, reportages, expériences personnelles</li>
+    </ul>
+    <div class="example">Ex historique sur la vieillesse : déclin physique + pitié (2450 av. JC) → sagesse et respect (Révolution française) → difficultés de fin de vie (contemporain)</div>
+  </div>
+
+  <!-- TD3 -->
+  <div id="td-td3" class="sub-content">
+    <h2>TD3 — Modèles de déshumanisation (approfondissement)</h2>
+
+    <h3>Contexte historique et précurseurs théoriques</h3>
+    <p>La déshumanisation a d'abord été associée aux violences de masse (Holocauste, esclavage, génocides). Les victimes étaient assimilées à de la vermine, des sous-hommes, des sauvages. Mais les recherches récentes montrent qu'elle est bien plus répandue, y compris dans le management et les soins.</p>
+
+    <div class="card rose">
+      <h4>Les précurseurs — à connaître pour le TD</h4>
+      <dl class="def-list">
+        <dt>Kelman (1976) &amp; Staub (1989)</dt>
+        <dd>La façon dont sont perçues les victimes réduit la retenue normale des comportements violents. Deux dénis clés : <strong>déni de l'identité</strong> (individualité) + <strong>déni de la communauté</strong> (appartenance affective). → Les victimes deviennent une masse désindividualisée sans générer de compassion.</dd>
+        <dt>Schwartz &amp; Struch (1989)</dt>
+        <dd>Les personnes sont déshumanisées quand elles sont perçues comme <strong>manquant de valeurs morales</strong> et que leurs valeurs sont perçues comme incongruentes avec celles de l'endogroupe.</dd>
+        <dt>Bar-Tal (1989)</dt>
+        <dd>La déshumanisation comme <strong>croyance collectivement partagée délégitimisante</strong> : on attribue à un groupe une étiquette sous-humaine ou démoniaque. Ne se produirait qu'en situation de conflit inter-ethnique extrême.</dd>
+        <dt>Opotow (1990)</dt>
+        <dd>Pas un déni d'attributs mais <strong>l'exclusion d'une communauté morale</strong> : on cesse d'envisager la souffrance et l'injustice subies par les cibles. Elles sont hors du cercle moral.</dd>
+        <dt>Bandura (1999)</dt>
+        <dd><strong>Désengagement moral</strong> : l'agresseur se désengagea moralement envers lui-même pour justifier ses actes violents.</dd>
+      </dl>
+    </div>
+
+    <h3>Récapitulatif des 5 modèles</h3>
+    <table class="schema">
+      <tr><th>Modèle</th><th>Auteurs</th><th>Concept central</th><th>Mesure</th></tr>
+      <tr><td>Infra-humanisation</td><td>Leyens et al., 2000-2002</td><td>Sentiments (émotions secondaires) plus attribués à l'endogroupe</td><td>Attribution de mots (émotions vs sentiments)</td></tr>
+      <tr><td>Modèle duel UH/NH</td><td>Haslam, 2006</td><td>2 types d'humanité → 2 types de déshumanisation (animalistique vs mécanistique)</td><td>Échelles UH et NH</td></tr>
+      <tr><td>SCM</td><td>Harris & Fiske, 2006</td><td>Low-low (basse chaleur/compétence) → pas d'activation MPFC → déshumanisation cérébrale</td><td>IRMf + questionnaires chaleur/compétence</td></tr>
+      <tr><td>Perception de l'esprit</td><td>Waytz et al., 2010</td><td>Démentalisation = échec d'attribution d'esprit (agentisme + expérience)</td><td>Attribution d'états mentaux</td></tr>
+      <tr><td>Déshumanisation flagrante</td><td>Kteily et al., 2015</td><td>Score de déshumanisation explicite via échelle de l'évolution</td><td>"Ascent of Man" (0-100)</td></tr>
+    </table>
+
+    <h3>Tableau des groupes dans le modèle duel (Loughnan & Haslam, 2007)</h3>
+    <div class="scm-grid">
+      <div class="scm-header">↑ HAUTE NATURE HUMAINE (NH)</div>
+      <div class="scm-header">↓ BASSE NATURE HUMAINE (NH)</div>
+      <div class="scm-cell hh">Artistes, enfants, personnes âgées, parents<br><em>(Haute UH + Haute NH)</em></div>
+      <div class="scm-cell hl">Handicapés, sans-abris, obèses<br><em>(Basse UH + Haute NH)</em><br>→ Double déshumanisation</div>
+      <div class="scm-cell lh">Universitaires, hommes d'affaires, criminels, police<br><em>(Haute UH + Basse NH)</em><br>→ Déshumanisation mécanistique</div>
+      <div class="scm-cell ll">Artistes, athlètes, étudiants asiatiques<br><em>(Haute UH + Haute NH)</em><br>→ Pas de déshumanisation</div>
+    </div>
+  </div>
+
+  <!-- TD4 -->
+  <div id="td-td4" class="sub-content">
+    <h2>TD4 — SCM et déshumanisation (approfondissement)</h2>
+
+    <h3>Rappel SCM et déshumanisation</h3>
+    <p>Harris & Fiske (2006/2011) : les groupes <strong>low chaleur / low compétence</strong> sont les seuls à ne pas activer spontanément le réseau de la cognition sociale (MPFC) → ils activent l'insula (dégoût). La déshumanisation est donc un phénomène neurobiologiquement mesurable.</p>
+
+    <h3>Tableau des conséquences comportementales selon le SCM</h3>
+    <table class="schema">
+      <tr><th>Chaleur</th><th>Compétence</th><th>Émotion</th><th>Comportements</th><th>Exemple</th></tr>
+      <tr><td>Haute</td><td>Haute</td><td>Admiration</td><td>Coopération, aide mutuelle</td><td>Endogroupe, alliés</td></tr>
+      <tr><td>Haute</td><td>Basse</td><td>Pitié/Paternalisme</td><td>Aide, protection, comportements paternalistes</td><td>Personnes âgées, handicapées</td></tr>
+      <tr><td>Basse</td><td>Haute</td><td>Envie</td><td>Combat, agression</td><td>Groupes "riches", perçus rivaux</td></tr>
+      <tr><td>Basse</td><td>Basse</td><td>Mépris</td><td>Exclusion, ignorance → déshumanisation</td><td>SDF, groupes marginaux</td></tr>
+    </table>
+
+    <h3>Perception de l'esprit — deux dimensions (Gray et al., 2007)</h3>
+    <div class="card lavender">
+      <dl class="def-list">
+        <dt>Agentisme</dt>
+        <dd>Capacités mentales : pensée, contrôle de soi, communication. Nous distingue des animaux.</dd>
+        <dt>Expérience</dt>
+        <dd>Émotions, conscience, personnalité. Nous distingue des robots et des objets.</dd>
+      </dl>
+      <p>La déshumanisation = "démentalisation" (Kozak et al., 2006) : échec à spontanément attribuer un esprit à autrui lors de la perception.</p>
+    </div>
+
+    <h3>Mesure alternative : Alabrello & Rubini (2012)</h3>
+    <p>Mesurer la déshumanisation via la privation de droits humains universels → si on accorde moins de droits à un groupe = déshumanisation indirecte et plus subtile que l'"Ascent of Man".</p>
+  </div>
+
+  <!-- TD5 -->
+  <div id="td-td5" class="sub-content">
+    <h2>TD5 — Stratégies de prévention de la déshumanisation et des stéréotypes</h2>
+
+    <h3>3 grandes approches</h3>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">🔷 Approche 1 : Basée sur la catégorisation</button>
+      <div class="accordion-body">
+        <h4>A. Affaiblir la catégorisation</h4>
+        <p><strong>Multi-catégorisation (Crisp et al., 2001) :</strong> présenter la cible avec plusieurs catégories simultanées (≥ 5 pour être efficace, car 2 seules = trop simple). Le cerveau ne peut plus se focaliser sur la catégorie stigmatisante. Résultat : réduction des biais intergroupes.</p>
+        <p><strong>Décatégorisation / identité commune (Gaertner) :</strong></p>
+        <ul>
+          <li>Représentation en groupes séparés → maintient le conflit</li>
+          <li>Représentation en individualités → améliore les attitudes envers les individus mais peu de généralisation</li>
+          <li>Représentation en identité duelle ou en groupe unique → réduction des biais (cognitifs, affectifs, comportementaux)</li>
+        </ul>
+        <div class="warning">Limites : risque d'assimilation (le groupe faible voit ses valeurs gommées), et peut créer des biais envers de nouveaux exogroupes. Conditions requises : statut égal, attitudes similaires, compétences égales, contact volontaire à long terme...</div>
+
+        <h4>B. Utiliser la catégorisation</h4>
+        <p><strong>Modèle de la différenciation mutuelle (Hewstone, 1996) :</strong> le contact intergroupe est efficace seulement si les identités originelles sont préservées → les membres de l'exogroupe doivent être vus comme typiques de cet exogroupe pour permettre la généralisation.</p>
+        <p><strong>Modèle de la double identité :</strong> identité supra-ordonnée créée sans faire disparaître les identités spécifiques. Ex : Coréen-Américain. Moins de préjugés que les identités uniques.</p>
+        <p><strong>4 stratégies d'adaptation (Berry, 1984) :</strong> Intégration (maintien identité + relations positives) | Séparatisme | Assimilation | Marginalisation</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">🔷 Approche 2 : Motivation à l'exactitude (suppression du stéréotype)</button>
+      <div class="accordion-body">
+        <p>Demander à une personne de raisonner à l'encontre du stéréotype. Résultats contradictoires :</p>
+        <ul>
+          <li>Réduirait l'influence (Kawakami)</li>
+          <li>Amplifierait l'influence (Galinsky)</li>
+        </ul>
+        <p><strong>Méta-analyse → effet rebond confirmé.</strong> Tâche coûteuse cognitivement. 3 conditions pour limiter l'effet rebond : motivation forte, capacité cognitive élevée, préjugés pas trop élevés au départ.</p>
+        <p><strong>Conclusion : inutile la plupart du temps, parfois contre-productif.</strong></p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAcc(this)">🔷 Approche 3 : Basée sur la dissonance (hypocrisie induite)</button>
+      <div class="accordion-body">
+        <p><strong>Paradigme de l'hypocrisie induite :</strong> l'individu perçoit l'écart entre ses valeurs (je suis contre la discrimination) et son comportement (j'ai des préjugés) → inconfort → modification des comportements.</p>
+        <p>Ne fonctionne que si la dissonance est ressentie par rapport aux <strong>valeurs personnelles</strong> (pas les normes de groupe).</p>
+        <p><strong>Programme d'éducation multiculturelle :</strong> méta-analyse Stephan & Stephan → 88% des études produisent des effets positifs. Mais : biais de publication suspecté, pas d'effet à moyen terme.</p>
+        <p><strong>Éducation anti-biais :</strong> 26 études → plus efficace chez les jeunes élèves, 12% montrent plus de préjugés après qu'avant → attention !</p>
+      </div>
+    </div>
+
+    <h3>Campagnes de communication (affaiblissement de la catégorisation)</h3>
+    <div class="card rose">
+      <p>Diffusion de messages positifs sur des groupes sociaux. Pour être efficaces, elles doivent être :</p>
+      <ul>
+        <li><strong>Positives :</strong> se focaliser sur les similitudes entre endogroupe et exogroupe</li>
+        <li><strong>Diversité :</strong> présenter le groupe comme divers et hétérogène</li>
+        <li><strong>Explicites :</strong> le message anti-stéréotype doit être clair</li>
+      </ul>
+      <p><strong>Campagnes valorisantes :</strong> valoriser les infos non-stéréotypiques sur l'exogroupe. L'efficacité dépend du nombre d'exemples contre-stéréotypiques. Un individu peut être l'argument (ex : Zidane contre le stéréotype "arabe = voleur").</p>
+      <p><strong>⚠️ Risque :</strong> traitement différencié des "exceptionnels" (ex : athlètes paralympiques vus comme des exceptions, pas comme représentatifs du groupe) → ne généralise pas au groupe.</p>
+    </div>
+
+    <h3>Éducation multiculturelle (utilisation de la catégorisation)</h3>
+    <div class="card lavender">
+      <p>Programmes pour apprendre aux élèves les ethnies, religions et autres groupes. Basée sur l'idée que l'<strong>ignorance est une des causes des préjugés</strong> (Stephan &amp; Stephan, 2001).</p>
+      <p><strong>5 composantes :</strong></p>
+      <ol style="margin-left:18px;line-height:1.9">
+        <li>Intégration de l'histoire et culture des groupes dans le cursus scolaire</li>
+        <li>Montrer comment les perspectives culturelles influencent l'interprétation (ex : version algérienne vs française de la guerre d'Algérie)</li>
+        <li>Développer une attitude positive envers les autres groupes</li>
+        <li>Utiliser des stratégies pédagogiques respectant les différents styles d'apprentissage</li>
+        <li>Créer une culture d'école promouvant l'égalité</li>
+      </ol>
+      <p><strong>Efficacité :</strong> méta-analyse Stephan &amp; Stephan → 41 études, 88% d'effets positifs sans dommages. Mais Bigler (1999) : biais de publication suspecté + absence d'effet à moyen terme.</p>
+    </div>
+
+    <h3>Éducation anti-biais</h3>
+    <div class="card mint">
+      <p>Fournir aux élèves une conscience du racisme institutionnel et les capacités pour le réduire dans leur sphère d'influence (Aboud &amp; Levy). Peut faire partie d'un programme multiculturel ou être indépendant.</p>
+      <p><strong>Efficacité :</strong> 26 études (McGregor) → plus de changement chez les jeunes élèves, mais <strong>12% des études montrent plus de préjugés après qu'avant</strong> → à utiliser avec précaution. Pas de données à long terme.</p>
+      <div class="warning">⚠️ La prof ne recommande pas l'éducation anti-biais à cause des 12% d'effets contre-productifs.</div>
+    </div>
+
+    <h3>Contact intergroupe — Méta-analyse Pettigrew & Tropp (2006)</h3>
+    <div class="card mint">
+      <p>94% des 696 échantillons montrent une réduction des préjugés avec le contact. L'effet se généralise au groupe entier (au-delà des participants).</p>
+      <p><strong>Changements observés :</strong></p>
+      <ul>
+        <li>Cognitifs : meilleure connaissance de l'exogroupe, moins de stéréotypes</li>
+        <li>Émotionnels : moins d'anxiété intergroupe, plus d'empathie</li>
+        <li>Comportementaux : plus de contacts</li>
+      </ul>
+      <p><strong>Facteurs limitants :</strong> attitudes préexistantes très négatives, anxiété intergroupe élevée, qualité des expériences passées, climat normatif.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ANNALES ===================== -->
+<div id="tab-annales" class="tab-content">
+  <h2>📝 Annales — Réponses types & probabilités au rattrapage</h2>
+
+  <div class="card peach" style="margin-bottom:28px">
+    <h4>🎯 Sujets les plus probables au rattrapage (selon les patterns des sessions précédentes)</h4>
+    <p>L'examen de rattrapage propose généralement <strong>2 sujets au choix</strong> (une copie double maximum). D'après les annales 2021, 2022, 2023 et 2024 :</p>
+    <ul>
+      <li><span class="proba proba-high">🔥 Très probable</span> Sujet Jessica Mange : stigmatisation, déshumanisation, stéréotypes, préjugés, discrimination en contexte organisationnel (application pratique)</li>
+      <li><span class="proba proba-high">🔥 Très probable</span> Sujet Manuel Tostain : déviance, transgression morale, systèmes normatifs, comportements génocidaires</li>
+      <li><span class="proba proba-med">📊 Probable</span> Format avec article de presse + analyse psychosociale (déshumanisation, cyber-violence)</li>
+      <li><span class="proba proba-low">💡 Moins probable</span> Sujet sur le changement d'attitude (dissonance cognitive — plutôt sujet de Cécile Sénémeaud)</li>
+    </ul>
+  </div>
+
+  <!-- ANNALE 1 -->
+  <div class="annale-card">
+    <div class="session-label">Session 1 · Décembre 2024 (session manquée)</div>
+    <h3 style="margin-top:0;color:var(--peach-deep)">Sujet 1 — Jessica MANGE</h3>
+    <div class="question-text">
+      Imaginez que vous venez d'être recruté·e dans une organisation qui vous demande de mettre en place une sensibilisation de ses équipes sur les processus de stigmatisation et discrimination d'un groupe stigmatisé (à vous de choisir). Vous devez rédiger une synthèse (une copie double maximum) à l'attention de la direction sur les éléments à prendre en compte d'un point de vue théorique et méthodologique sur ces questions en présentant ce que l'on sait actuellement sur les processus liés à la stigmatisation, aux stéréotypes, aux préjugés, à la déshumanisation et à la discrimination et sur les dispositifs efficaces pour prévenir ces phénomènes.
+    </div>
+    <span class="proba proba-high">🔥 Type de sujet très récurrent</span>
+    <div class="answer-box">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">📖 Voir le plan type & réponse détaillée</button>
+      <div class="answer-text">
+        <h4>Structure recommandée</h4>
+        <p><strong>Introduction :</strong> Présenter le contexte (groupe choisi : ex. personnes en situation de handicap psychique, personnes LGBT+, seniors en entreprise...). Définir la stigmatisation comme processus central.</p>
+
+        <h4>Partie I — Les processus : du stéréotype à la déshumanisation</h4>
+        <p><strong>1. Les définitions clés (progression logique)</strong></p>
+        <ul>
+          <li><strong>Stéréotype</strong> (Fiske) : croyance généralisée sur un groupe → origine : catégorisation sociale, heuristique cognitive</li>
+          <li><strong>Préjugé</strong> : dimension affective/évaluative négative → lié aux stéréotypes</li>
+          <li><strong>Stigmate</strong> (Goffman, 1963) : reconnaissance d'une différence + dévaluation. 3 catégories, 8 dimensions (visibilité, contrôlabilité, dangerosité, sévérité...)</li>
+          <li><strong>Déshumanisation</strong> : effacement de l'humanité. Modèles : infra-humanisation (Leyens), modèle duel UH/NH (Haslam), SCM (Harris & Fiske)</li>
+        </ul>
+        <p><strong>2. Manifestations de la stigmatisation (Pryor & Reeder, 2011)</strong><br>
+        Stigmatisation publique (cognitif, affectif, comportemental) — auto-stigmatisation — par association — structurelle.</p>
+        <p><strong>3. Pourquoi stigmatise-t-on ? (Phelan & Link, 2008)</strong><br>
+        Keep down / Keep in / Keep away.</p>
+        <p><strong>4. Le SCM appliqué au groupe choisi</strong><br>
+        Où se situe mon groupe sur l'axe chaleur × compétence ? Quelles conséquences comportementales ?</p>
+
+        <h4>Partie II — La discrimination : données et mesures</h4>
+        <p>Méthode du testing (études DARES, ADIA), comparaison d'échantillons. Ce que dit la loi (L1132-1). Attention au cadrage des données.</p>
+
+        <h4>Partie III — Les dispositifs de prévention efficaces</h4>
+        <p><strong>Basés sur la catégorisation :</strong></p>
+        <ul>
+          <li>Multi-catégorisation (Crisp et al., 2001) : ≥5 catégories, casse l'heuristique</li>
+          <li>Décatégorisation et identité commune (Gaertner) — conditions requises</li>
+          <li>Contact intergroupe (Pettigrew & Tropp, 2006) : méta-analyse, 94% d'effet positif</li>
+        </ul>
+        <p><strong>Basés sur la dissonance :</strong> hypocrisie induite — créer l'écart entre valeurs et comportements.</p>
+        <p><strong>Communication :</strong> équilibrer savoirs chauds et savoirs froids, contre-stéréotypes.</p>
+        <p><strong>Suppression du stéréotype :</strong> à éviter (effet rebond).</p>
+
+        <h4>Conclusion</h4>
+        <p>Synthèse des mécanismes psychosociaux. Recommandations concrètes adaptées au groupe choisi. Ouverture : l'intersectionnalité, les limites des interventions actuelles.</p>
+
+        <div class="note">💡 Conseil : choisir un groupe que vous connaissez bien des TDs (ex : personnes schizophrènes si vous avez travaillé dessus, ou personnes en situation de handicap, chômeurs de longue durée, LGBT+). Illustrez chaque concept avec des études (Leyens, Fiske, Bargh, Pryor...).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANNALE 2 -->
+  <div class="annale-card">
+    <div class="session-label">Session 1 · Décembre 2024 (session manquée)</div>
+    <h3 style="margin-top:0;color:var(--peach-deep)">Sujet 2 — Sacha AZOULAY, Manuel TOSTAIN</h3>
+    <div class="question-text">
+      À partir des cadres d'analyses et des exemples vus en cours, expliquez quelles critiques peuvent susciter les conceptions de la déviance en termes de pure transgression morale et dans quelle mesure les comportements conçus comme déviants peuvent répondre à des systèmes de valeurs / systèmes normatifs particuliers. La réponse devra être argumentée et l'apport de connaissances personnelles pertinentes sera valorisé.
+    </div>
+    <span class="proba proba-high">🔥 Thématique Tostain — Récurrente</span>
+    <div class="answer-box">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">📖 Voir le plan type & réponse détaillée</button>
+      <div class="answer-text">
+        <h4>Structure recommandée</h4>
+        <p><strong>Introduction :</strong> Définir la déviance. Présenter la tension entre approche universaliste (transgression morale absolue) et approche relativiste/contextuelle (systèmes normatifs).</p>
+
+        <h4>Partie I — La conception de la déviance comme transgression morale et ses limites</h4>
+        <p>La déviance vue comme violation de normes morales universelles. Critiques :</p>
+        <ul>
+          <li>Ce qui est "déviant" varie selon les cultures, les époques, les groupes → relativisme culturel (ex : homosexualité longtemps classifiée comme pathologie dans le DSM)</li>
+          <li>La définition de la déviance est un acte de <strong>pouvoir</strong> : c'est le groupe dominant qui définit ce qui est normal (Phelan & Link : "keep people in")</li>
+          <li>Le stigmate lui-même est un outil de maintien de l'ordre social et de domination</li>
+          <li>Biais de catégorisation : on essentialise les comportements déviants ("c'est dans leur nature")</li>
+        </ul>
+
+        <h4>Partie II — La déviance comme réponse à des systèmes normatifs particuliers</h4>
+        <p>Les comportements qualifiés de déviants peuvent être normatifs dans d'autres systèmes de valeurs :</p>
+        <ul>
+          <li>Exemple des génocides (Tostain) : les bourreaux agissent en conformité avec les normes de leur groupe — dynamiques génocidaires (Reicher, Haslam & Rath, 2008)</li>
+          <li>Théorie de la banalité du mal (Arendt) vs "bourreau volontaire" (Goldhagen) — débat sur l'ordinaire vs l'exceptionnel dans les actes violents collectifs</li>
+          <li>La radicalisation comme processus d'adhésion à un nouveau système normatif</li>
+          <li>L'effet Milgram : soumission à l'autorité → comportements "déviants" pour la société mais normaux dans le contexte de l'expérience</li>
+        </ul>
+
+        <h4>Partie III — Implications théoriques et pratiques</h4>
+        <p>L'approche transdisciplinaire (psychologie sociale, sociologie, histoire) est nécessaire pour saisir la complexité des comportements violents. Limites de chaque approche (monstres ordinaires vs bourreaux volontaires).</p>
+
+        <h4>Conclusion</h4>
+        <p>La déviance est une construction sociale, relationnelle et contextuelle. Les psychologues doivent tenir compte des systèmes de valeurs particuliers dans leurs analyses, sans pour autant tomber dans le relativisme moral absolu. Ouverture sur la prévention.</p>
+
+        <div class="note">💡 Pour ce sujet Tostain, appuyez-vous sur les TD et CM sur les comportements déviants, les dynamiques génocidaires, la radicalisation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANNALE 3 -->
+  <div class="annale-card">
+    <div class="session-label">Session 1 · Décembre 2022 — Sujet 1 (Mange) : Chômeurs de longue durée</div>
+    <h3 style="margin-top:0;color:var(--peach-deep)">Questions sur la déshumanisation des chômeurs</h3>
+    <div class="question-text">
+      1. De quels modèles théoriques de la perception d'humanité sont issues les mesures utilisées par la psychologue ? Présentez en quelques lignes ces modèles. (3 points)
+      <br><br>2. Quels autres modèles existent pour mesurer la perception d'humanité ? Présentez brièvement les modèles. (2 points)
+      <br><br>3. Selon vous, quelle est l'hypothèse de la psychologue ? (1 point)
+      <br><br>4. Au regard des résultats : l'hypothèse est-elle validée ? Précisez quel effet est significatif. (2 points)
+    </div>
+    <span class="proba proba-high">🔥 Type de question fréquent : lire des tableaux de résultats</span>
+    <div class="answer-box">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">📖 Voir les réponses type</button>
+      <div class="answer-text">
+        <h4>Réponse Q1 : Modèles utilisés</h4>
+        <p>Les mesures utilisées (attribution de traits d'Unicité Humaine, de Nature Humaine, et échelle de l'évolution) sont issues de deux modèles :</p>
+        <ul>
+          <li><strong>Modèle duel UH/NH (Haslam, 2006) :</strong> Haslam dist
+    <div class="answer-box">
+      <button class="answer-toggle" onclick="toggleAnswer(this)">📖 Voir les réponses type</button>
+      <div class="answer-text">
+        <h4>Réponse Q1 : Modèles utilisés</h4>
+        <p>Les mesures UH, NH et "Ascent of Man" viennent du <strong>modèle duel Haslam (2006)</strong> et de la <strong>déshumanisation flagrante (Kteily et al., 2015)</strong>.</p>
+        <h4>Réponse Q2 : Autres modèles</h4>
+        <ul><li>Infra-humanisation (Leyens, 2000-2002) : sentiments vs émotions</li><li>SCM Harris &amp; Fiske (2006) : MPFC / low-low</li><li>Perception de l'esprit (Waytz, 2010) : agentisme + expérience</li><li>Privation de droits (Alabrello &amp; Rubini, 2012)</li></ul>
+        <h4>Réponse Q3 : Hypothèse</h4>
+        <p>Les recruteurs déshumanisent les chômeurs longue durée en leur attribuant moins d'UH, moins de NH, et un score d'évolution plus faible vs salariés.</p>
+        <h4>Réponse Q4 : Validation (tableaux 2022)</h4>
+        <p>Unicité Humaine : t(110)=5,89, p=.001 → <strong>significatif ✓</strong>. Nature Humaine : p=.322 → non sig. Échelle évolution : p=.023 → <strong>significatif ✓</strong>. Conclusion : déshumanisation animalistique validée (déni UH), pas mécanistique.</p>
+        <div class="note">💡 Lire un tableau : p &lt; .05 = significatif. η²p &gt; .06 = effet moyen. Toujours préciser le sens (qui est plus bas que qui).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FICHE RATTRAPAGE -->
+  <div class="annale-card" style="border-top-color:var(--mint-deep)">
+    <div class="session-label">🎯 Anticipation — Sujets probables au rattrapage</div>
+    <h3 style="margin-top:0;color:var(--mint-deep)">Ce qui risque de tomber</h3>
+    <span class="proba proba-high">🔥 Très probable : Sujet Mange — synthèse organisationnelle + prévention</span><br>
+    <span class="proba proba-high">🔥 Très probable : Sujet Tostain — déviance, comportements génocidaires, radicalisation</span><br><br>
+    <h4>Checklist incontournable dans toute copie</h4>
+    <div class="card mint">
+      <ul>
+        <li>✅ Définir chaque concept avant de l'utiliser (stigmate, stéréotype, préjugé, déshumanisation)</li>
+        <li>✅ Citer les auteurs avec dates (Fiske 2002, Leyens 2000, Haslam 2006, Bargh 1996, Steele &amp; Aronson, Pettigrew &amp; Tropp 2006)</li>
+        <li>✅ Donner des exemples concrets d'études</li>
+        <li>✅ Lier théorie → application pratique</li>
+        <li>✅ Mentionner les limites des interventions</li>
+        <li>✅ Conclure avec synthèse + ouverture</li>
+        <li>❌ Ne pas confondre stéréotype (cognition) et préjugé (affect)</li>
+        <li>❌ Ne pas confondre déshumanisation animalistique (déni UH) et mécanistique (déni NH)</li>
+        <li>❌ Ne pas dire que la suppression du stéréotype est efficace (effet rebond !)</li>
+        <li>❌ Ne pas oublier que le contact intergroupe a des CONDITIONS requises</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+  function showSub(prefix, name) {
+    const parent = document.getElementById('tab-' + prefix);
+    parent.querySelectorAll('.sub-content').forEach(t => t.classList.remove('active'));
+    parent.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(prefix + '-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+  function toggleAcc(btn) {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  }
+  function toggleAnswer(btn) {
+    const ans = btn.nextElementSibling;
+    ans.classList.toggle('open');
+    btn.textContent = ans.classList.contains('open') ? '🙈 Masquer' : '📖 Voir les réponses type';
+  }
+</script>
+</body>
+</html>
